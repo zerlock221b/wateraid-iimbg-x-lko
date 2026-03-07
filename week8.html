@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 8 - WaterAid Internship</title>
+
+    <!-- Google Fonts: DM Serif Display + DM Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles and Scripts -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">WATERAID X IIMBG</a>
+        <ul class="nav-links">
+            <li>
+                <a href="#">Weeks ▼</a>
+                <div class="dropdown">
+                    <a href="week1.html">Week 1</a>
+                    <a href="week2.html" class="highlight">Week 2</a>
+                    <a href="week3.html">Week 3</a>
+                    <a href="week4.html">Week 4</a>
+                    <a href="week5.html" class="highlight">Week 5</a>
+                    <a href="week6.html">Week 6</a>
+                    <a href="week7.html">Week 7</a>
+                    <a href="week8.html" class="highlight">Week 8</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">Project Info ▼</a>
+                <div class="dropdown">
+                    <a href="bayer.html">Bayer</a>
+                    <a href="viega.html">Viega</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">Challenges ▼</a>
+                <div class="dropdown">
+                    <a href="technical_challenges.html">Technical Challenges</a>
+                    <a href="policy_interventions.html">Policy Interventions</a>
+                </div>
+            </li>
+            <li>
+                <button id="theme-toggle" aria-label="Toggle Theme">🌓</button>
+            </li>
+        </ul>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- WEEK HERO BANNER -->
+    <!-- WEEK 8: HERO START -->
+    <section class="week-hero">
+        <h1>Week 8: Final Handoff</h1>
+        <p class="week-hero-subtitle">Concluding the internship with final reports and presentations.</p>
+        </section>
+    <!-- WEEK 8: HERO END -->
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+
+        <!-- 1. PHOTO CARD STACK SECTION -->
+        <!-- WEEK 8: PHOTOS START -->
+        <section class="section week-container" id="week8-photos">
+            <h2 class="section-title">This Week in the Field</h2>
+
+            <div class="carousel-container">
+                <button id="prevBtn" class="carousel-btn" aria-label="Previous Photo">❮</button>
+                
+                <div class="photo-card carousel-card">
+                    <img id="carouselImage" src="assets/week8/montage1/IMG-20260307-WA0000.jpg" alt="Week 8 Montage Photo" onerror="this.onerror=null; this.src='assets/week1/montage1/IMG-20260307-WA0000.jpg';">
+                    <p id="carouselCaption" class="photo-card-caption">Photo 1 of 48</p>
+                </div>
+                
+                <button id="nextBtn" class="carousel-btn" aria-label="Next Photo">❯</button>
+            </div>
+
+            <script>
+                // Specific array for the 48 images
+                const weekPhotos = [
+                    "IMG-20260307-WA0000.jpg", "IMG-20260307-WA0003.jpg", "IMG-20260307-WA0006.jpg", "IMG-20260307-WA0008.jpg", 
+                    "IMG-20260307-WA0010.jpg", "IMG-20260307-WA0011.jpg", "IMG-20260307-WA0013.jpg", "IMG-20260307-WA0014.jpg", 
+                    "IMG-20260307-WA0017.jpg", "IMG-20260307-WA0019.jpg", "IMG-20260307-WA0022.jpg", "IMG-20260307-WA0024.jpg", 
+                    "IMG-20260307-WA0026.jpg", "IMG-20260307-WA0027.jpg", "IMG-20260307-WA0029.jpg", "IMG-20260307-WA0031.jpg", 
+                    "IMG-20260307-WA0033.jpg", "IMG-20260307-WA0034.jpg", "IMG-20260307-WA0035.jpg", "IMG-20260307-WA0038.jpg", 
+                    "IMG-20260307-WA0039.jpg", "IMG-20260307-WA0041.jpg", "IMG-20260307-WA0043.jpg", "IMG-20260307-WA0045.jpg", 
+                    "IMG-20260307-WA0046.jpg", "IMG-20260307-WA0047.jpg", "IMG-20260307-WA0052.jpg", "IMG-20260307-WA0053.jpg", 
+                    "IMG-20260307-WA0055.jpg", "IMG-20260307-WA0067.jpg", "IMG-20260307-WA0071.jpg", "IMG-20260307-WA0072.jpg", 
+                    "IMG-20260307-WA0073.jpg", "IMG-20260307-WA0074.jpg", "IMG-20260307-WA0075.jpg", "IMG-20260307-WA0076.jpg", 
+                    "IMG-20260307-WA0077.jpg", "IMG-20260307-WA0078.jpg", "IMG-20260307-WA0079.jpg", "IMG-20260307-WA0080.jpg", 
+                    "IMG-20260307-WA0081.jpg", "IMG-20260307-WA0082.jpg", "IMG-20260307-WA0083.jpg", "IMG-20260307-WA0084.jpg", 
+                    "IMG-20260307-WA0090.jpg", "IMG-20260307-WA0095.jpg", "IMG-20260307-WA0097.jpg", "IMG-20260307-WA0101.jpg"
+                ];
+                let currentIndex = 0;
+                
+                const imgEl = document.getElementById('carouselImage');
+                const capEl = document.getElementById('carouselCaption');
+                
+                function updateCarousel() {
+                    imgEl.style.opacity = '0.5';
+                    setTimeout(() => {
+                        const newSrc = 'assets/week8/montage1/' + weekPhotos[currentIndex];
+                        imgEl.src = newSrc;
+                        capEl.innerText = 'Photo ' + (currentIndex + 1) + ' of ' + weekPhotos.length;
+                        imgEl.style.opacity = '1';
+                    }, 150);
+                }
+                
+                document.getElementById('prevBtn').addEventListener('click', () => {
+                    currentIndex = (currentIndex > 0) ? currentIndex - 1 : weekPhotos.length - 1;
+                    updateCarousel();
+                });
+                
+                document.getElementById('nextBtn').addEventListener('click', () => {
+                    currentIndex = (currentIndex < weekPhotos.length - 1) ? currentIndex + 1 : 0;
+                    updateCarousel();
+                });
+                
+                // Fallback inside setTimeout if week folder images do not exist yet
+                imgEl.onerror = function() {
+                    this.onerror=null;
+                    this.src='assets/week1/montage1/' + weekPhotos[currentIndex];
+                };
+
+                imgEl.style.transition = 'opacity 0.15s ease-in-out';
+            </script>
+        </section>
+        <!-- WEEK 8: PHOTOS END -->
+
+        <!-- 2. ACHIEVEMENTS SECTION -->
+        <!-- WEEK 8: ACHIEVEMENTS START -->
+        <!-- ACHIEVEMENTS REMOVED -->
+        <!-- WEEK 8: ACHIEVEMENTS END -->
+
+        <!-- 3. CHALLENGES SECTION -->
+        <!-- WEEK 8: CHALLENGES START -->
+        <section class="section week-container glass-panel" id="week8-challenges">
+            <h2 class="section-title">Challenges Faced</h2>
+            <p>
+                See detailed logs in
+                <a href="technical_challenges.html">Technical Challenges</a>
+                and
+                <a href="policy_interventions.html">Policy Interventions</a>.
+            </p>
+            <p>Placeholder challenge description. Describe the specific obstacles, constraints, or
+                unexpected developments encountered during this week of the internship.</p>
+        </section>
+        <!-- WEEK 8: CHALLENGES END -->
+
+        <!-- 4. VIDEO SECTION -->
+        <!-- WEEK 8: VIDEO START -->
+        <section class="section week-container" id="week8-video">
+            <h2 class="section-title">Field Documentation</h2>
+            <div class="video-embed-container">
+                <iframe src="https://www.youtube.com/embed/PLACEHOLDER" width="100%" title="Week 8 Field Documentation"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+        <!-- WEEK 8: VIDEO END -->
+
+        <!-- 5. REPORT SECTION -->
+        <!-- WEEK 8: REPORT START -->
+        <section class="section week-container" id="week8-report">
+            <div class="report-section report-active">
+                <h2 class="section-title">Week 8 Report</h2>
+                <p>Download the full Week 8 field report.</p>
+                <a class="report-btn" href="reports/week8_report.pdf">Download Week 8 Final Report →</a>
+            </div>
+        </section>
+        <!-- WEEK 8: REPORT END -->
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© zerlock221b</p>
+    </footer>
+
+</body>
+
+</html>

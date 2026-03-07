@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Challenges | WaterAid India Internship Portfolio</title>
+
+    <!-- Google Fonts: DM Serif Display + DM Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles and Scripts -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">WATERAID X IIMBG</a>
+        <ul class="nav-links">
+            <li>
+                <a href="#">Weeks ▼</a>
+                <div class="dropdown">
+                    <a href="week1.html">Week 1</a>
+                    <a href="week2.html" class="highlight">Week 2</a>
+                    <a href="week3.html">Week 3</a>
+                    <a href="week4.html">Week 4</a>
+                    <a href="week5.html" class="highlight">Week 5</a>
+                    <a href="week6.html">Week 6</a>
+                    <a href="week7.html">Week 7</a>
+                    <a href="week8.html" class="highlight">Week 8</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">Project Info ▼</a>
+                <div class="dropdown">
+                    <a href="bayer.html">Bayer</a>
+                    <a href="viega.html">Viega</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">Challenges ▼</a>
+                <div class="dropdown">
+                    <a href="technical_challenges.html">Technical Challenges</a>
+                    <a href="policy_interventions.html">Policy Interventions</a>
+                </div>
+            </li>
+            <li>
+                <button id="theme-toggle" aria-label="Toggle Theme">🌓</button>
+            </li>
+        </ul>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- WEEK HERO BANNER -->
+    <section class="week-hero">
+        <h1>Technical Challenges</h1>
+        <p class="week-hero-subtitle">Engineering and infrastructure obstacles encountered in the field</p>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+
+        <!-- 1. INTRO -->
+        <section class="section week-container">
+            <p>These are the technical challenges encountered across both the Bayer and Viega projects during the 8-week
+                internship. Each challenge card shows the problem, which week it appeared, and current status.</p>
+        </section>
+
+        <!-- 2. CHALLENGES GRID -->
+        <section class="section week-container">
+            <div class="project-grid challenges-grid">
+
+                <!-- TECHNICAL: CHALLENGES START -->
+
+                <!-- Card 1 -->
+                <div class="challenge-box">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔧</div>
+                    <h4>Rusted Piping Systems</h4>
+                    <p style="margin-bottom: 1rem;">Severe oxidation in existing pipe networks at Anganwadi Centres
+                        rendering them non-functional. Requires full replacement rather than repair.</p>
+                    <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 0.5rem;">First observed: Week 1</p>
+                    <span class="status-badge status-ongoing">Ongoing</span>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="challenge-box">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧱</div>
+                    <h4>Missing Boundary Walls</h4>
+                    <p style="margin-bottom: 1rem;">Several Anganwadi Centres lack perimeter boundary walls, exposing
+                        WASH facilities to contamination and unauthorized access.</p>
+                    <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 0.5rem;">First observed: Week 2</p>
+                    <span class="status-badge status-pending">Pending</span>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="challenge-box">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🗺️</div>
+                    <h4>Unfavorable Site Topography</h4>
+                    <p style="margin-bottom: 1rem;">Natural drainage gradients at BKT pond sites cause water to pool in
+                        undesirable areas, complicating dredging and channel design.</p>
+                    <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 0.5rem;">First observed: Week 3</p>
+                    <span class="status-badge status-ongoing">Ongoing</span>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="challenge-box">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚧</div>
+                    <h4>Silt Accumulation Depth</h4>
+                    <p style="margin-bottom: 1rem;">Silt depth in BKT ponds exceeded initial estimates, requiring
+                        extended dredging timelines and additional equipment allocation.</p>
+                    <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 0.5rem;">First observed: Week 4</p>
+                    <span class="status-badge status-resolved">Resolved</span>
+                </div>
+
+                <!-- TECHNICAL: CHALLENGES END -->
+
+                <!-- 3. ADD NEW CHALLENGE PROMPT -->
+                <!-- ADD NEW CHALLENGE CARD HERE WHEN NEEDED -->
+                <div class="challenge-box glass-panel"
+                    style="border: 2px dashed var(--glass-border); text-align: center; display: flex; align-items: center; justify-content: center; opacity: 0.7;">
+                    <p>New challenge will appear here</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© zerlock221b</p>
+    </footer>
+
+</body>
+
+</html>
