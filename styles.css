@@ -974,18 +974,18 @@ body.dark-theme .footer {
     top: var(--nav-height);
     left: 0;
     width: 100%;
-    /* full-width vertical list */
     height: auto;
     max-height: calc(100vh - var(--nav-height));
     flex-direction: column;
     align-items: stretch;
     gap: 0;
     padding: 1rem 1.5rem 1.5rem;
-    background: var(--glass-bg);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border-bottom: 1px solid var(--glass-border);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    background: rgba(220, 237, 255, 0.97);
+    /* near-solid — easy to read on mobile */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 130, 200, 0.25);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
     overflow-y: auto;
     display: none;
     /* hidden until .nav-open applied */
@@ -1006,7 +1006,7 @@ body.dark-theme .footer {
     display: block;
     padding: 0.75rem 0;
     font-size: 1rem;
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid rgba(0, 130, 200, 0.15);
   }
 
   .nav-links a::after {
@@ -1020,10 +1020,10 @@ body.dark-theme .footer {
     min-width: auto;
     width: 100%;
     padding: 0 0 0 1rem;
-    background: transparent;
+    background: rgba(200, 225, 255, 0.6);
     backdrop-filter: none;
     border: none;
-    border-radius: 0;
+    border-radius: 8px;
     box-shadow: none;
     opacity: 1;
     visibility: visible;
@@ -1036,7 +1036,7 @@ body.dark-theme .footer {
 
   .dropdown a {
     padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(0, 130, 200, 0.1);
   }
 
   /* Hero */
@@ -1169,7 +1169,7 @@ body.dark-theme .footer {
   background: rgba(0, 130, 200, 0.5);
 }
 
-/*  VIDEO EMBED ─ */
+/* ─── VIDEO EMBED ────────────────────────────── */
 .video-embed-container {
   position: relative;
   width: 100%;
@@ -1181,6 +1181,7 @@ body.dark-theme .footer {
   box-shadow: var(--glass-shadow);
   background: #000;
 }
+
 .video-embed-container iframe {
   position: absolute;
   top: 0;
