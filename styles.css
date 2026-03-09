@@ -1023,11 +1023,12 @@ body.dark-theme .footer {
 
   /* Dropdowns inside mobile nav */
   .nav-links li .dropdown {
-    position: static;
+    position: relative;
+    z-index: 10;
     transform: none;
     min-width: auto;
     width: 100%;
-    padding: 0 0 0 1rem;
+    padding: 0.25rem 0 0.25rem 0;
     background: rgba(200, 225, 255, 0.6);
     backdrop-filter: none;
     border: none;
@@ -1042,9 +1043,25 @@ body.dark-theme .footer {
     display: none;
   }
 
-  .dropdown a {
-    padding: 0.5rem 0;
+  /* Full-width, min 44px touch targets for dropdown links on mobile */
+  .nav-links li .dropdown a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: var(--text-primary);
     border-bottom: 1px solid rgba(0, 130, 200, 0.1);
+    box-sizing: border-box;
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+    -webkit-tap-highlight-color: rgba(0, 130, 200, 0.12);
+  }
+
+  .nav-links li .dropdown a:last-child {
+    border-bottom: none;
   }
 
   /* Hero */
