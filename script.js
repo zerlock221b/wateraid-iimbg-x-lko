@@ -64,6 +64,8 @@ function $$(sel, ctx) {
 
   function closeMenu() {
     navLinks.classList.remove('nav-open');
+    // Also close any open dropdowns when the whole menu closes
+    $$('.dropdown.dropdown-open').forEach((d) => d.classList.remove('dropdown-open'));
     hamburger.textContent = '☰';
     hamburger.setAttribute('aria-expanded', 'false');
   }
@@ -74,9 +76,13 @@ function $$(sel, ctx) {
     isOpen ? closeMenu() : openMenu();
   });
 
-  // Close on any nav link click
+  // Close the menu only when tapping a REAL navigation link (not parent
+  // dropdown labels whose href="#" — those are toggle triggers, not pages).
   $$('a', navLinks).forEach((link) => {
-    link.addEventListener('click', closeMenu);
+    const href = link.getAttribute('href');
+    if (href && href !== '#') {
+      link.addEventListener('click', closeMenu);
+    }
   });
 
   // Close when clicking anywhere outside the navbar
@@ -100,39 +106,46 @@ function $$(sel, ctx) {
 
   if (!isTouchDevice()) return; // CSS hover handles desktop
 
-  $$('.nav-links li').forEach((li) => {
+  // On mobile the dropdowns are always visible (static layout).
+  // We only need to intercept taps on the top-level <a> labels
+  // ("Weeks ▼", "Project Info ▼", "Challenges ▼") — never on links
+  // inside the dropdown itself, so navigation is never blocked.
+  $$('.nav-links > li').forEach((li) => {
     const dropdown = li.querySelector('.dropdown');
     if (!dropdown) return;
 
-    li.addEventListener('click', (e) => {
+    // The direct child <a> is the section label (e.g. "Weeks ▼")
+    const label = li.querySelector(':scope > a');
+    if (!label) return;
+
+    label.addEventListener('click', (e) => {
+      // If tapping on a link INSIDE the dropdown, let it navigate
+      if (e.target.closest('.dropdown')) return;
+
+      // Stop the event bubbling to the document-level listener in initHamburger
+      // so the whole .nav-links menu doesn't collapse when toggling a dropdown
+      e.stopPropagation();
+      e.preventDefault();
+
       const isOpen = dropdown.classList.contains('dropdown-open');
 
-      // Close all other open dropdowns
+      // Close all open dropdowns first
       $$('.dropdown.dropdown-open').forEach((d) => {
         d.classList.remove('dropdown-open');
-        d.style.opacity = '';
-        d.style.visibility = '';
-        d.style.pointerEvents = '';
       });
 
+      // Open this one if it was closed
       if (!isOpen) {
-        e.preventDefault();
         dropdown.classList.add('dropdown-open');
-        dropdown.style.opacity = '1';
-        dropdown.style.visibility = 'visible';
-        dropdown.style.pointerEvents = 'auto';
       }
     });
   });
 
-  // Close dropdowns on outside tap
+  // Close all dropdowns on outside tap
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.nav-links li')) {
       $$('.dropdown.dropdown-open').forEach((d) => {
         d.classList.remove('dropdown-open');
-        d.style.opacity = '';
-        d.style.visibility = '';
-        d.style.pointerEvents = '';
       });
     }
   });
