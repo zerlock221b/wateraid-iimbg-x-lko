@@ -755,6 +755,14 @@ body.dark-theme .footer {
   transform: translateY(0);
 }
 
+.survey-link-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 /* ─── 11. WEEK HERO BANNER ──────────────────── */
 
 .week-hero {
