@@ -67,7 +67,7 @@
     <section class="week-hero">
         <h1>Week 2: Data Collection</h1>
         <p class="week-hero-subtitle">Gathering water quality data and community feedback.</p>
-        </section>
+    </section>
     <!-- WEEK 2: HERO END -->
 
     <!-- MAIN CONTENT -->
@@ -80,36 +80,38 @@
 
             <div class="carousel-container">
                 <button id="prevBtn" class="carousel-btn" aria-label="Previous Photo">❮</button>
-                
+
                 <div class="photo-card carousel-card">
-                    <img id="carouselImage" src="assets/week2/montage1/IMG-20260307-WA0000.jpg" alt="Week 2 Montage Photo" onerror="this.onerror=null; this.src='assets/week1/montage1/IMG-20260307-WA0000.jpg';">
+                    <img id="carouselImage" src="assets/week2/montage1/IMG-20260307-WA0000.jpg"
+                        alt="Week 2 Montage Photo"
+                        onerror="this.onerror=null; this.src='assets/week1/montage1/IMG-20260307-WA0000.jpg';">
                     <p id="carouselCaption" class="photo-card-caption">Photo 1 of 48</p>
                 </div>
-                
+
                 <button id="nextBtn" class="carousel-btn" aria-label="Next Photo">❯</button>
             </div>
 
             <script>
                 // Specific array for the 48 images
                 const weekPhotos = [
-                    "IMG-20260307-WA0000.jpg", "IMG-20260307-WA0003.jpg", "IMG-20260307-WA0006.jpg", "IMG-20260307-WA0008.jpg", 
-                    "IMG-20260307-WA0010.jpg", "IMG-20260307-WA0011.jpg", "IMG-20260307-WA0013.jpg", "IMG-20260307-WA0014.jpg", 
-                    "IMG-20260307-WA0017.jpg", "IMG-20260307-WA0019.jpg", "IMG-20260307-WA0022.jpg", "IMG-20260307-WA0024.jpg", 
-                    "IMG-20260307-WA0026.jpg", "IMG-20260307-WA0027.jpg", "IMG-20260307-WA0029.jpg", "IMG-20260307-WA0031.jpg", 
-                    "IMG-20260307-WA0033.jpg", "IMG-20260307-WA0034.jpg", "IMG-20260307-WA0035.jpg", "IMG-20260307-WA0038.jpg", 
-                    "IMG-20260307-WA0039.jpg", "IMG-20260307-WA0041.jpg", "IMG-20260307-WA0043.jpg", "IMG-20260307-WA0045.jpg", 
-                    "IMG-20260307-WA0046.jpg", "IMG-20260307-WA0047.jpg", "IMG-20260307-WA0052.jpg", "IMG-20260307-WA0053.jpg", 
-                    "IMG-20260307-WA0055.jpg", "IMG-20260307-WA0067.jpg", "IMG-20260307-WA0071.jpg", "IMG-20260307-WA0072.jpg", 
-                    "IMG-20260307-WA0073.jpg", "IMG-20260307-WA0074.jpg", "IMG-20260307-WA0075.jpg", "IMG-20260307-WA0076.jpg", 
-                    "IMG-20260307-WA0077.jpg", "IMG-20260307-WA0078.jpg", "IMG-20260307-WA0079.jpg", "IMG-20260307-WA0080.jpg", 
-                    "IMG-20260307-WA0081.jpg", "IMG-20260307-WA0082.jpg", "IMG-20260307-WA0083.jpg", "IMG-20260307-WA0084.jpg", 
+                    "IMG-20260307-WA0000.jpg", "IMG-20260307-WA0003.jpg", "IMG-20260307-WA0006.jpg", "IMG-20260307-WA0008.jpg",
+                    "IMG-20260307-WA0010.jpg", "IMG-20260307-WA0011.jpg", "IMG-20260307-WA0013.jpg", "IMG-20260307-WA0014.jpg",
+                    "IMG-20260307-WA0017.jpg", "IMG-20260307-WA0019.jpg", "IMG-20260307-WA0022.jpg", "IMG-20260307-WA0024.jpg",
+                    "IMG-20260307-WA0026.jpg", "IMG-20260307-WA0027.jpg", "IMG-20260307-WA0029.jpg", "IMG-20260307-WA0031.jpg",
+                    "IMG-20260307-WA0033.jpg", "IMG-20260307-WA0034.jpg", "IMG-20260307-WA0035.jpg", "IMG-20260307-WA0038.jpg",
+                    "IMG-20260307-WA0039.jpg", "IMG-20260307-WA0041.jpg", "IMG-20260307-WA0043.jpg", "IMG-20260307-WA0045.jpg",
+                    "IMG-20260307-WA0046.jpg", "IMG-20260307-WA0047.jpg", "IMG-20260307-WA0052.jpg", "IMG-20260307-WA0053.jpg",
+                    "IMG-20260307-WA0055.jpg", "IMG-20260307-WA0067.jpg", "IMG-20260307-WA0071.jpg", "IMG-20260307-WA0072.jpg",
+                    "IMG-20260307-WA0073.jpg", "IMG-20260307-WA0074.jpg", "IMG-20260307-WA0075.jpg", "IMG-20260307-WA0076.jpg",
+                    "IMG-20260307-WA0077.jpg", "IMG-20260307-WA0078.jpg", "IMG-20260307-WA0079.jpg", "IMG-20260307-WA0080.jpg",
+                    "IMG-20260307-WA0081.jpg", "IMG-20260307-WA0082.jpg", "IMG-20260307-WA0083.jpg", "IMG-20260307-WA0084.jpg",
                     "IMG-20260307-WA0090.jpg", "IMG-20260307-WA0095.jpg", "IMG-20260307-WA0097.jpg", "IMG-20260307-WA0101.jpg"
                 ];
                 let currentIndex = 0;
-                
+
                 const imgEl = document.getElementById('carouselImage');
                 const capEl = document.getElementById('carouselCaption');
-                
+
                 function updateCarousel() {
                     imgEl.style.opacity = '0.5';
                     setTimeout(() => {
@@ -119,21 +121,21 @@
                         imgEl.style.opacity = '1';
                     }, 150);
                 }
-                
+
                 document.getElementById('prevBtn').addEventListener('click', () => {
                     currentIndex = (currentIndex > 0) ? currentIndex - 1 : weekPhotos.length - 1;
                     updateCarousel();
                 });
-                
+
                 document.getElementById('nextBtn').addEventListener('click', () => {
                     currentIndex = (currentIndex < weekPhotos.length - 1) ? currentIndex + 1 : 0;
                     updateCarousel();
                 });
-                
+
                 // Fallback inside setTimeout if week folder images do not exist yet
-                imgEl.onerror = function() {
-                    this.onerror=null;
-                    this.src='assets/week1/montage1/' + weekPhotos[currentIndex];
+                imgEl.onerror = function () {
+                    this.onerror = null;
+                    this.src = 'assets/week1/montage1/' + weekPhotos[currentIndex];
                 };
 
                 imgEl.style.transition = 'opacity 0.15s ease-in-out';
@@ -146,42 +148,21 @@
         <!-- ACHIEVEMENTS REMOVED -->
         <!-- WEEK 2: ACHIEVEMENTS END -->
 
-        <!-- 3. CHALLENGES SECTION -->
-        <!-- WEEK 2: CHALLENGES START -->
-        <section class="section week-container glass-panel" id="week2-challenges">
-            <h2 class="section-title">Challenges Faced</h2>
-            <p>
-                See detailed logs in
-                <a href="technical_challenges.html">Technical Challenges</a>
-                and
-                <a href="policy_interventions.html">Policy Interventions</a>.
-            </p>
-            <p>Placeholder challenge description. Describe the specific obstacles, constraints, or
-                unexpected developments encountered during this week of the internship.</p>
-        </section>
-        <!-- WEEK 2: CHALLENGES END -->
-
-        <!-- 4. VIDEO SECTION -->
-        <!-- WEEK 2: VIDEO START -->
-        <section class="section week-container" id="week2-video">
-            <h2 class="section-title">Field Documentation</h2>
-            <div class="video-embed-container">
-                <iframe src="https://www.youtube.com/embed/PLACEHOLDER" width="100%" title="Week 2 Field Documentation"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
-            </div>
-        </section>
-        <!-- WEEK 2: VIDEO END -->
+        <!-- 3. CHALLENGES SECTION REMOVED -->
+        <!-- 4. VIDEO SECTION REMOVED -->
 
         <!-- 5. REPORT SECTION -->
         <!-- WEEK 2: REPORT START -->
         <section class="section week-container" id="week2-report">
-            <div class="report-section report-active" style="text-align:center; padding: 2rem; background: rgba(0,0,0,0.2); border-radius: 12px; margin-top: 2rem;">
+            <div class="report-section report-active"
+                style="text-align:center; padding: 2rem; background: rgba(0,0,0,0.2); border-radius: 12px; margin-top: 2rem;">
                 <h2 class="section-title">Week 2 Report</h2>
                 <p>Download the full Week 2 field report.</p>
-                <a class="report-btn" href="reports/week2_report.pdf" style="display:inline-block; padding: 0.8rem 2rem; background: #0099ff; color: white; border-radius: 999px; text-decoration: none; font-weight: bold; margin-top: 1rem; box-shadow: 0 4px 15px rgba(0,153,255,0.4); transition: transform 0.2s;">Download Week 2 Report →</a>
+                <a class="report-btn"
+                    href="https://iimbodhgaya-my.sharepoint.com/:w:/g/personal/md_zakirnaseem2029i_iimbodhgaya_onmicrosoft_com/IQD79DpPSRB2SqXRZ-jIFkobAcWTW733rf9LXSnz0mgq3c4?e=llkLAJ"
+                    target="_blank" rel="noopener noreferrer"
+                    style="display:inline-block; padding: 0.8rem 2rem; background: #0099ff; color: white; border-radius: 999px; text-decoration: none; font-weight: bold; margin-top: 1rem; box-shadow: 0 4px 15px rgba(0,153,255,0.4); transition: transform 0.2s;">View
+                    Week 2 Report →</a>
             </div>
         </section>
         <!-- WEEK 2: REPORT END -->
