@@ -720,6 +720,53 @@ body.dark-theme .footer {
   border: 1px solid #b91c1c;
 }
 
+/* Project section header + tag pill */
+.challenges-project-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.project-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid transparent;
+}
+
+/* Bayer: warm amber tone */
+.project-tag-bayer {
+  background: rgba(251, 191, 36, 0.18);
+  color: #92400e;
+  border-color: rgba(234, 179, 8, 0.4);
+}
+
+body.dark-theme .project-tag-bayer {
+  background: rgba(251, 191, 36, 0.12);
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+/* Viega: cool teal/blue tone */
+.project-tag-viega {
+  background: rgba(6, 182, 212, 0.15);
+  color: #0e7490;
+  border-color: rgba(6, 182, 212, 0.35);
+}
+
+body.dark-theme .project-tag-viega {
+  background: rgba(6, 182, 212, 0.1);
+  color: #22d3ee;
+  border-color: rgba(6, 182, 212, 0.28);
+}
+
 /* ─── 10. REPORT BUTTON & SECTION ───────────── */
 
 .report-section {
