@@ -82,30 +82,26 @@
                 <button id="prevBtn" class="carousel-btn" aria-label="Previous Photo">❮</button>
 
                 <div class="photo-card carousel-card">
-                    <img id="carouselImage" src="assets/week2/montage1/IMG-20260307-WA0000.jpg"
-                        alt="Week 2 Montage Photo"
-                        onerror="this.onerror=null; this.src='assets/week1/montage1/IMG-20260307-WA0000.jpg';">
-                    <p id="carouselCaption" class="photo-card-caption">Photo 1 of 48</p>
+                    <img id="carouselImage" src="assets/week2/montage1/photo1.jpg" alt="Week 2 Montage Photo">
+                    <p id="carouselCaption" class="photo-card-caption">Photo 1 of 36</p>
                 </div>
 
                 <button id="nextBtn" class="carousel-btn" aria-label="Next Photo">❯</button>
             </div>
 
             <script>
-                // Specific array for the 48 images
+                // Actual filenames in assets/week2/montage1/
                 const weekPhotos = [
-                    "IMG-20260307-WA0000.jpg", "IMG-20260307-WA0003.jpg", "IMG-20260307-WA0006.jpg", "IMG-20260307-WA0008.jpg",
-                    "IMG-20260307-WA0010.jpg", "IMG-20260307-WA0011.jpg", "IMG-20260307-WA0013.jpg", "IMG-20260307-WA0014.jpg",
-                    "IMG-20260307-WA0017.jpg", "IMG-20260307-WA0019.jpg", "IMG-20260307-WA0022.jpg", "IMG-20260307-WA0024.jpg",
-                    "IMG-20260307-WA0026.jpg", "IMG-20260307-WA0027.jpg", "IMG-20260307-WA0029.jpg", "IMG-20260307-WA0031.jpg",
-                    "IMG-20260307-WA0033.jpg", "IMG-20260307-WA0034.jpg", "IMG-20260307-WA0035.jpg", "IMG-20260307-WA0038.jpg",
-                    "IMG-20260307-WA0039.jpg", "IMG-20260307-WA0041.jpg", "IMG-20260307-WA0043.jpg", "IMG-20260307-WA0045.jpg",
-                    "IMG-20260307-WA0046.jpg", "IMG-20260307-WA0047.jpg", "IMG-20260307-WA0052.jpg", "IMG-20260307-WA0053.jpg",
-                    "IMG-20260307-WA0055.jpg", "IMG-20260307-WA0067.jpg", "IMG-20260307-WA0071.jpg", "IMG-20260307-WA0072.jpg",
-                    "IMG-20260307-WA0073.jpg", "IMG-20260307-WA0074.jpg", "IMG-20260307-WA0075.jpg", "IMG-20260307-WA0076.jpg",
-                    "IMG-20260307-WA0077.jpg", "IMG-20260307-WA0078.jpg", "IMG-20260307-WA0079.jpg", "IMG-20260307-WA0080.jpg",
-                    "IMG-20260307-WA0081.jpg", "IMG-20260307-WA0082.jpg", "IMG-20260307-WA0083.jpg", "IMG-20260307-WA0084.jpg",
-                    "IMG-20260307-WA0090.jpg", "IMG-20260307-WA0095.jpg", "IMG-20260307-WA0097.jpg", "IMG-20260307-WA0101.jpg"
+                    "photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg",
+                    "photo5.jpg", "photo6.jpg", "photo7.jpg", "photo8.jpg",
+                    "photo9.jpg", "photo10.jpg", "photo11.jpg", "photo12.jpg",
+                    "photo13.jpg", "photo14.jpg", "photo15.jpg", "photo16.jpg",
+                    "photo17.jpg",
+                    "photo18.jpeg", "photo19.jpeg", "photo20.jpeg", "photo21.jpeg",
+                    "photo22.jpeg", "photo23.jpeg", "photo24.jpeg", "photo25.jpeg",
+                    "photo26.jpeg", "photo27.jpeg", "photo28.jpeg", "photo29.jpeg",
+                    "photo30.jpeg", "photo31.jpeg", "photo32.jpeg", "photo33.jpeg",
+                    "photo34.jpeg", "photo35.jpeg", "photo36.jpeg"
                 ];
                 let currentIndex = 0;
 
@@ -115,8 +111,7 @@
                 function updateCarousel() {
                     imgEl.style.opacity = '0.5';
                     setTimeout(() => {
-                        const newSrc = 'assets/week2/montage1/' + weekPhotos[currentIndex];
-                        imgEl.src = newSrc;
+                        imgEl.src = 'assets/week2/montage1/' + weekPhotos[currentIndex];
                         capEl.innerText = 'Photo ' + (currentIndex + 1) + ' of ' + weekPhotos.length;
                         imgEl.style.opacity = '1';
                     }, 150);
@@ -131,12 +126,6 @@
                     currentIndex = (currentIndex < weekPhotos.length - 1) ? currentIndex + 1 : 0;
                     updateCarousel();
                 });
-
-                // Fallback inside setTimeout if week folder images do not exist yet
-                imgEl.onerror = function () {
-                    this.onerror = null;
-                    this.src = 'assets/week1/montage1/' + weekPhotos[currentIndex];
-                };
 
                 imgEl.style.transition = 'opacity 0.15s ease-in-out';
             </script>
