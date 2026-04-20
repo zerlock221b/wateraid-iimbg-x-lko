@@ -74,69 +74,139 @@
     <main class="container">
 
         <!-- 1. PHOTO CARD STACK SECTION -->
-        <!-- WEEK 7: PHOTOS START -->
+                <!-- WEEK 7: PHOTOS START -->
         <section class="section week-container" id="week7-photos">
             <h2 class="section-title">This Week in the Field</h2>
 
-            <div class="carousel-container">
-                <button id="prevBtn" class="carousel-btn" aria-label="Previous Photo">❮</button>
-                
-                <div class="photo-card carousel-card">
-                    <img id="carouselImage" src="assets/week7/montage1/IMG-20260307-WA0000.jpg" alt="Week 7 Montage Photo" onerror="this.onerror=null; this.src='assets/week1/montage1/IMG-20260307-WA0000.jpg';">
-                    <p id="carouselCaption" class="photo-card-caption">Photo 1 of 48</p>
+            <style>
+                .marquee-controls {
+                    display: flex;
+                    justify-content: center;
+                    gap: 1.5rem;
+                    margin-top: 1.5rem;
+                    position: relative;
+                    z-index: 10;
+                }
+                .marquee-wrapper {
+                    width: 100vw;
+                    margin-left: 50%;
+                    transform: translateX(-50%);
+                    overflow: hidden;
+                    white-space: nowrap;
+                    background: var(--glass-bg);
+                    padding: 2rem 0;
+                    margin-top: 1.5rem;
+                    box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+                }
+                .marquee-track {
+                    display: inline-flex;
+                    gap: 1.5rem;
+                    padding-right: 1.5rem;
+                    will-change: transform;
+                }
+                .marquee-item {
+                    flex-shrink: 0;
+                    height: 250px;
+                    border-radius: 12px;
+                    overflow: hidden;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+                    transition: transform 0.3s ease;
+                }
+                .marquee-item:hover {
+                    transform: scale(1.02);
+                }
+                .marquee-item img {
+                    height: 100%;
+                    width: auto;
+                    object-fit: cover;
+                }
+            </style>
+
+            <div class="marquee-controls">
+                <button id="marqueeRev" class="carousel-btn" aria-label="Move Backwards">❮</button>
+                <button id="marqueeFwd" class="carousel-btn" aria-label="Move Forwards">❯</button>
+            </div>
+
+            <div class="marquee-wrapper">
+                <div class="marquee-track" id="marqueeTrack">
+                    <!-- Images will be injected here via JS -->
                 </div>
-                
-                <button id="nextBtn" class="carousel-btn" aria-label="Next Photo">❯</button>
             </div>
 
             <script>
-                // Specific array for the 48 images
-                const weekPhotos = [
-                    "IMG-20260307-WA0000.jpg", "IMG-20260307-WA0003.jpg", "IMG-20260307-WA0006.jpg", "IMG-20260307-WA0008.jpg", 
-                    "IMG-20260307-WA0010.jpg", "IMG-20260307-WA0011.jpg", "IMG-20260307-WA0013.jpg", "IMG-20260307-WA0014.jpg", 
-                    "IMG-20260307-WA0017.jpg", "IMG-20260307-WA0019.jpg", "IMG-20260307-WA0022.jpg", "IMG-20260307-WA0024.jpg", 
-                    "IMG-20260307-WA0026.jpg", "IMG-20260307-WA0027.jpg", "IMG-20260307-WA0029.jpg", "IMG-20260307-WA0031.jpg", 
-                    "IMG-20260307-WA0033.jpg", "IMG-20260307-WA0034.jpg", "IMG-20260307-WA0035.jpg", "IMG-20260307-WA0038.jpg", 
-                    "IMG-20260307-WA0039.jpg", "IMG-20260307-WA0041.jpg", "IMG-20260307-WA0043.jpg", "IMG-20260307-WA0045.jpg", 
-                    "IMG-20260307-WA0046.jpg", "IMG-20260307-WA0047.jpg", "IMG-20260307-WA0052.jpg", "IMG-20260307-WA0053.jpg", 
-                    "IMG-20260307-WA0055.jpg", "IMG-20260307-WA0067.jpg", "IMG-20260307-WA0071.jpg", "IMG-20260307-WA0072.jpg", 
-                    "IMG-20260307-WA0073.jpg", "IMG-20260307-WA0074.jpg", "IMG-20260307-WA0075.jpg", "IMG-20260307-WA0076.jpg", 
-                    "IMG-20260307-WA0077.jpg", "IMG-20260307-WA0078.jpg", "IMG-20260307-WA0079.jpg", "IMG-20260307-WA0080.jpg", 
-                    "IMG-20260307-WA0081.jpg", "IMG-20260307-WA0082.jpg", "IMG-20260307-WA0083.jpg", "IMG-20260307-WA0084.jpg", 
-                    "IMG-20260307-WA0090.jpg", "IMG-20260307-WA0095.jpg", "IMG-20260307-WA0097.jpg", "IMG-20260307-WA0101.jpg"
-                ];
-                let currentIndex = 0;
-                
-                const imgEl = document.getElementById('carouselImage');
-                const capEl = document.getElementById('carouselCaption');
-                
-                function updateCarousel() {
-                    imgEl.style.opacity = '0.5';
-                    setTimeout(() => {
-                        const newSrc = 'assets/week7/montage1/' + weekPhotos[currentIndex];
-                        imgEl.src = newSrc;
-                        capEl.innerText = 'Photo ' + (currentIndex + 1) + ' of ' + weekPhotos.length;
-                        imgEl.style.opacity = '1';
-                    }, 150);
-                }
-                
-                document.getElementById('prevBtn').addEventListener('click', () => {
-                    currentIndex = (currentIndex > 0) ? currentIndex - 1 : weekPhotos.length - 1;
-                    updateCarousel();
-                });
-                
-                document.getElementById('nextBtn').addEventListener('click', () => {
-                    currentIndex = (currentIndex < weekPhotos.length - 1) ? currentIndex + 1 : 0;
-                    updateCarousel();
-                });
-                
-                // Fallback inside setTimeout if week folder images do not exist yet
-                imgEl.onerror = function() {
-                    this.onerror=null;
-                    this.src='assets/week1/montage1/' + weekPhotos[currentIndex];
-                };
+                // --- CONFIGURATION ---
+                // Update this number when you add or remove photos from the folder.
+                const TOTAL_PHOTOS = 0; // Set to the actual number of photos
+                const WEEK_FOLDER = 'week7'; // Update this for week2, week3, etc.
+                // ---------------------
 
-                imgEl.style.transition = 'opacity 0.15s ease-in-out';
+                const track = document.getElementById('marqueeTrack');
+                const wrapper = document.querySelector('.marquee-wrapper');
+                
+                if (TOTAL_PHOTOS === 0) {
+                    track.innerHTML = '<div style="padding: 2rem; color: var(--text-muted); text-align: center; width: 100vw; font-style: italic;">No photos uploaded yet for this week.</div>';
+                } else {
+                    let html = '';
+                    for (let i = 1; i <= TOTAL_PHOTOS; i++) {
+                        html += `
+                            <div class="marquee-item">
+                                <img src="assets/${WEEK_FOLDER}/montage1/photo${i}.jpg" alt="Site Visit Photo" loading="lazy">
+                            </div>
+                        `;
+                    }
+
+                    // Duplicate the items to ensure a seamless infinite scroll loop
+                    track.innerHTML = html + html;
+                }
+
+                let position = 0;
+                let direction = -1; // -1 = Left (Forward), 1 = Right (Backward)
+                let isPaused = false;
+                let lastTime = 0;
+                
+                // Duration for one full loop -> Reduced by 30% from the previous 20s (20000 / 0.7)
+                const DURATION_MS = 40815; 
+
+                function animateMarquee(time) {
+                    if (!lastTime) lastTime = time;
+                    const delta = time - lastTime;
+                    lastTime = time;
+
+                    // Prevent huge jumps if tab was suspended
+                    if (delta > 0 && delta < 100 && !isPaused && TOTAL_PHOTOS > 0) {
+                        const halfWidth = track.scrollWidth / 2;
+                        const speed = halfWidth / DURATION_MS; 
+                        
+                        position += speed * delta * direction;
+
+                        if (position <= -halfWidth) {
+                            position += halfWidth;
+                        } else if (position > 0) {
+                            position -= halfWidth;
+                        }
+
+                        track.style.transform = `translateX(${position}px)`;
+                    }
+
+                    requestAnimationFrame(animateMarquee);
+                }
+
+                if (TOTAL_PHOTOS > 0) {
+                    requestAnimationFrame(animateMarquee);
+                }
+
+                // Hover pausing
+                wrapper.addEventListener('mouseenter', () => isPaused = true);
+                wrapper.addEventListener('mouseleave', () => isPaused = false);
+
+                // Direction toggles
+                document.getElementById('marqueeRev').addEventListener('click', () => {
+                    direction = 1; // Move backward
+                });
+                
+                document.getElementById('marqueeFwd').addEventListener('click', () => {
+                    direction = -1; // Move forward
+                });
             </script>
         </section>
         <!-- WEEK 7: PHOTOS END -->
