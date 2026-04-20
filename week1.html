@@ -104,20 +104,24 @@
                     padding-right: 1.5rem;
                     will-change: transform;
                 }
-                .marquee-item {
+                                .marquee-item {
                     flex-shrink: 0;
+                    width: 350px; /* Fixed width for uniform framing */
                     height: 250px;
-                    border-radius: 12px;
+                    border-radius: 16px;
                     overflow: hidden;
-                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-                    transition: transform 0.3s ease;
+                    border: 3px solid var(--glass-border);
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+                    transition: transform 0.3s ease, border-color 0.3s ease;
+                    background: var(--glass-bg);
                 }
                 .marquee-item:hover {
-                    transform: scale(1.02);
+                    transform: scale(1.05);
+                    border-color: var(--wa-blue);
                 }
                 .marquee-item img {
+                    width: 100%;
                     height: 100%;
-                    width: auto;
                     object-fit: cover;
                 }
             </style>
