@@ -168,8 +168,8 @@
                 let isPaused = false;
                 let lastTime = 0;
                 
-                // Duration for one full loop -> Reduced by 30% from the previous 20s (20000 / 0.7)
-                const DURATION_MS = 40815; 
+                // Duration for one full loop -> Reduced speed by 50% (81630ms)
+                const DURATION_MS = 81630; 
 
                 function animateMarquee(time) {
                     if (!lastTime) lastTime = time;
