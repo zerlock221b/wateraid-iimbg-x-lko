@@ -74,60 +74,139 @@
     <main class="container">
 
         <!-- 1. PHOTO CARD STACK SECTION -->
-        <!-- WEEK 2: PHOTOS START -->
+                <!-- WEEK 2: PHOTOS START -->
         <section class="section week-container" id="week2-photos">
             <h2 class="section-title">This Week in the Field</h2>
 
-            <div class="carousel-container">
-                <button id="prevBtn" class="carousel-btn" aria-label="Previous Photo">❮</button>
+            <style>
+                .marquee-controls {
+                    display: flex;
+                    justify-content: center;
+                    gap: 1.5rem;
+                    margin-top: 1.5rem;
+                    position: relative;
+                    z-index: 10;
+                }
+                .marquee-wrapper {
+                    width: 100vw;
+                    margin-left: 50%;
+                    transform: translateX(-50%);
+                    overflow: hidden;
+                    white-space: nowrap;
+                    background: var(--glass-bg);
+                    padding: 2rem 0;
+                    margin-top: 1.5rem;
+                    box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+                }
+                .marquee-track {
+                    display: inline-flex;
+                    gap: 1.5rem;
+                    padding-right: 1.5rem;
+                    will-change: transform;
+                }
+                .marquee-item {
+                    flex-shrink: 0;
+                    height: 250px;
+                    border-radius: 12px;
+                    overflow: hidden;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+                    transition: transform 0.3s ease;
+                }
+                .marquee-item:hover {
+                    transform: scale(1.02);
+                }
+                .marquee-item img {
+                    height: 100%;
+                    width: auto;
+                    object-fit: cover;
+                }
+            </style>
 
-                <div class="photo-card carousel-card">
-                    <img id="carouselImage" src="assets/week2/montage1/photo1.jpg" alt="Week 2 Montage Photo">
-                    <p id="carouselCaption" class="photo-card-caption">Photo 1 of 36</p>
+            <div class="marquee-controls">
+                <button id="marqueeRev" class="carousel-btn" aria-label="Move Backwards">❮</button>
+                <button id="marqueeFwd" class="carousel-btn" aria-label="Move Forwards">❯</button>
+            </div>
+
+            <div class="marquee-wrapper">
+                <div class="marquee-track" id="marqueeTrack">
+                    <!-- Images will be injected here via JS -->
                 </div>
-
-                <button id="nextBtn" class="carousel-btn" aria-label="Next Photo">❯</button>
             </div>
 
             <script>
-                // Actual filenames in assets/week2/montage1/
-                const weekPhotos = [
-                    "photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg",
-                    "photo5.jpg", "photo6.jpg", "photo7.jpg", "photo8.jpg",
-                    "photo9.jpg", "photo10.jpg", "photo11.jpg", "photo12.jpg",
-                    "photo13.jpg", "photo14.jpg", "photo15.jpg", "photo16.jpg",
-                    "photo17.jpg",
-                    "photo18.jpeg", "photo19.jpeg", "photo20.jpeg", "photo21.jpeg",
-                    "photo22.jpeg", "photo23.jpeg", "photo24.jpeg", "photo25.jpeg",
-                    "photo26.jpeg", "photo27.jpeg", "photo28.jpeg", "photo29.jpeg",
-                    "photo30.jpeg", "photo31.jpeg", "photo32.jpeg", "photo33.jpeg",
-                    "photo34.jpeg", "photo35.jpeg", "photo36.jpeg"
-                ];
-                let currentIndex = 0;
+                // --- CONFIGURATION ---
+                // Update this number when you add or remove photos from the folder.
+                const TOTAL_PHOTOS = 36; // Set to the actual number of photos
+                const WEEK_FOLDER = 'week2'; // Update this for week2, week3, etc.
+                // ---------------------
 
-                const imgEl = document.getElementById('carouselImage');
-                const capEl = document.getElementById('carouselCaption');
+                const track = document.getElementById('marqueeTrack');
+                const wrapper = document.querySelector('.marquee-wrapper');
+                
+                if (TOTAL_PHOTOS === 0) {
+                    track.innerHTML = '<div style="padding: 2rem; color: var(--text-muted); text-align: center; width: 100vw; font-style: italic;">No photos uploaded yet for this week.</div>';
+                } else {
+                    let html = '';
+                    for (let i = 1; i <= TOTAL_PHOTOS; i++) {
+                        html += `
+                            <div class="marquee-item">
+                                <img src="assets/${WEEK_FOLDER}/montage1/photo${i}.jpg" alt="Site Visit Photo" loading="lazy">
+                            </div>
+                        `;
+                    }
 
-                function updateCarousel() {
-                    imgEl.style.opacity = '0.5';
-                    setTimeout(() => {
-                        imgEl.src = 'assets/week2/montage1/' + weekPhotos[currentIndex];
-                        capEl.innerText = 'Photo ' + (currentIndex + 1) + ' of ' + weekPhotos.length;
-                        imgEl.style.opacity = '1';
-                    }, 150);
+                    // Duplicate the items to ensure a seamless infinite scroll loop
+                    track.innerHTML = html + html;
                 }
 
-                document.getElementById('prevBtn').addEventListener('click', () => {
-                    currentIndex = (currentIndex > 0) ? currentIndex - 1 : weekPhotos.length - 1;
-                    updateCarousel();
-                });
+                let position = 0;
+                let direction = -1; // -1 = Left (Forward), 1 = Right (Backward)
+                let isPaused = false;
+                let lastTime = 0;
+                
+                // Duration for one full loop -> Reduced by 30% from the previous 20s (20000 / 0.7)
+                const DURATION_MS = 40815; 
 
-                document.getElementById('nextBtn').addEventListener('click', () => {
-                    currentIndex = (currentIndex < weekPhotos.length - 1) ? currentIndex + 1 : 0;
-                    updateCarousel();
-                });
+                function animateMarquee(time) {
+                    if (!lastTime) lastTime = time;
+                    const delta = time - lastTime;
+                    lastTime = time;
 
-                imgEl.style.transition = 'opacity 0.15s ease-in-out';
+                    // Prevent huge jumps if tab was suspended
+                    if (delta > 0 && delta < 100 && !isPaused && TOTAL_PHOTOS > 0) {
+                        const halfWidth = track.scrollWidth / 2;
+                        const speed = halfWidth / DURATION_MS; 
+                        
+                        position += speed * delta * direction;
+
+                        if (position <= -halfWidth) {
+                            position += halfWidth;
+                        } else if (position > 0) {
+                            position -= halfWidth;
+                        }
+
+                        track.style.transform = `translateX(${position}px)`;
+                    }
+
+                    requestAnimationFrame(animateMarquee);
+                }
+
+                if (TOTAL_PHOTOS > 0) {
+                    requestAnimationFrame(animateMarquee);
+                }
+
+                // Hover pausing
+                wrapper.addEventListener('mouseenter', () => isPaused = true);
+                wrapper.addEventListener('mouseleave', () => isPaused = false);
+
+                // Direction toggles
+                document.getElementById('marqueeRev').addEventListener('click', () => {
+                    direction = 1; // Move backward
+                });
+                
+                document.getElementById('marqueeFwd').addEventListener('click', () => {
+                    direction = -1; // Move forward
+                });
             </script>
         </section>
         <!-- WEEK 2: PHOTOS END -->
