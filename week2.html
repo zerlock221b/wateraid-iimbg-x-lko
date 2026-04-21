@@ -92,19 +92,34 @@
                     width: 100vw;
                     margin-left: 50%;
                     transform: translateX(-50%);
-                    overflow: hidden;
+                    overflow-x: auto; /* Enable horizontal scrolling */
+                    overflow-y: hidden;
                     white-space: nowrap;
                     background: var(--glass-bg);
-                    padding: 2rem 0;
+                    padding: 2rem 0 1rem 0; /* Adjusted bottom pad for scrollbar */
                     margin-top: 1.5rem;
                     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+                }
+
+                /* Custom Scrollbar for Marquee */
+                .marquee-wrapper::-webkit-scrollbar {
+                    height: 10px;
+                }
+                .marquee-wrapper::-webkit-scrollbar-track {
+                    background: var(--glass-border);
+                    border-radius: 5px;
+                    margin: 0 2rem;
+                }
+                .marquee-wrapper::-webkit-scrollbar-thumb {
+                    background: var(--wa-blue);
+                    border-radius: 5px;
                 }
 
                 .marquee-track {
                     display: inline-flex;
                     gap: 1.5rem;
                     padding-right: 1.5rem;
-                    will-change: transform;
+                    /* Removed will-change: transform */
                 }
 
                 .marquee-item {
@@ -169,10 +184,10 @@
                     track.innerHTML = html + html;
                 }
 
-                let position = 0;
                 let direction = -1; // -1 = Left (Forward), 1 = Right (Backward)
                 let isPaused = false;
                 let lastTime = 0;
+                let exactScrollPosition = 0; // Tracks precise fractional pixel shifts
 
                 // Duration for one full loop -> Reduced speed by 50% (81630ms)
                 const DURATION_MS = 81630;
@@ -187,15 +202,22 @@
                         const halfWidth = track.scrollWidth / 2;
                         const speed = halfWidth / DURATION_MS;
 
-                        position += speed * delta * direction;
-
-                        if (position <= -halfWidth) {
-                            position += halfWidth;
-                        } else if (position > 0) {
-                            position -= halfWidth;
+                        // If user moved the scrollbar manually, sync the exactScrollPosition to match wrapper
+                        if (Math.abs(wrapper.scrollLeft - exactScrollPosition) > 2) {
+                            exactScrollPosition = wrapper.scrollLeft;
                         }
 
-                        track.style.transform = `translateX(${position}px)`;
+                        // Adjust based on direction (-1 is moving items to the left, which means scrollbar moves right)
+                        exactScrollPosition += speed * delta * (direction === -1 ? 1 : -1);
+
+                        // Infinite loop logic based on scrollLeft
+                        if (exactScrollPosition >= halfWidth) {
+                            exactScrollPosition -= halfWidth;
+                        } else if (exactScrollPosition <= 0) {
+                            exactScrollPosition += halfWidth;
+                        }
+
+                        wrapper.scrollLeft = exactScrollPosition;
                     }
 
                     requestAnimationFrame(animateMarquee);
@@ -208,6 +230,10 @@
                 // Hover pausing
                 wrapper.addEventListener('mouseenter', () => isPaused = true);
                 wrapper.addEventListener('mouseleave', () => isPaused = false);
+                
+                // Allow pausing on touch/scroll for mobile users
+                wrapper.addEventListener('touchstart', () => isPaused = true);
+                wrapper.addEventListener('touchend', () => isPaused = false);
 
                 // Direction toggles
                 document.getElementById('marqueeRev').addEventListener('click', () => {
