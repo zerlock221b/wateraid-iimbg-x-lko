@@ -92,19 +92,34 @@
                     width: 100vw;
                     margin-left: 50%;
                     transform: translateX(-50%);
-                    overflow: hidden;
+                    overflow-x: auto; /* Enable horizontal scrolling */
+                    overflow-y: hidden;
                     white-space: nowrap;
                     background: var(--glass-bg);
-                    padding: 2rem 0;
+                    padding: 2rem 0 1rem 0; /* Adjusted bottom pad for scrollbar */
                     margin-top: 1.5rem;
                     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+                }
+
+                /* Custom Scrollbar for Marquee */
+                .marquee-wrapper::-webkit-scrollbar {
+                    height: 10px;
+                }
+                .marquee-wrapper::-webkit-scrollbar-track {
+                    background: var(--glass-border);
+                    border-radius: 5px;
+                    margin: 0 2rem;
+                }
+                .marquee-wrapper::-webkit-scrollbar-thumb {
+                    background: var(--wa-blue);
+                    border-radius: 5px;
                 }
 
                 .marquee-track {
                     display: inline-flex;
                     gap: 1.5rem;
                     padding-right: 1.5rem;
-                    will-change: transform;
+                    /* Removed will-change: transform */
                 }
 
                 .marquee-item {
