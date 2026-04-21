@@ -67,14 +67,14 @@
     <section class="week-hero">
         <h1>Week 3: Analysis</h1>
         <p class="week-hero-subtitle">Processing data and identifying core challenges.</p>
-        </section>
+    </section>
     <!-- WEEK 3: HERO END -->
 
     <!-- MAIN CONTENT -->
     <main class="container">
 
         <!-- 1. PHOTO CARD STACK SECTION -->
-                <!-- WEEK 3: PHOTOS START -->
+        <!-- WEEK 3: PHOTOS START -->
         <section class="section week-container" id="week3-photos">
             <h2 class="section-title">This Week in the Field</h2>
 
@@ -87,6 +87,7 @@
                     position: relative;
                     z-index: 10;
                 }
+
                 .marquee-wrapper {
                     width: 100vw;
                     margin-left: 50%;
@@ -96,17 +97,20 @@
                     background: var(--glass-bg);
                     padding: 2rem 0;
                     margin-top: 1.5rem;
-                    box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+                    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
                 }
+
                 .marquee-track {
                     display: inline-flex;
                     gap: 1.5rem;
                     padding-right: 1.5rem;
                     will-change: transform;
                 }
-                                .marquee-item {
+
+                .marquee-item {
                     flex-shrink: 0;
-                    width: 350px; /* Fixed width for uniform framing */
+                    width: 350px;
+                    /* Fixed width for uniform framing */
                     height: 250px;
                     border-radius: 16px;
                     overflow: hidden;
@@ -115,10 +119,12 @@
                     transition: transform 0.3s ease, border-color 0.3s ease;
                     background: var(--glass-bg);
                 }
+
                 .marquee-item:hover {
                     transform: scale(1.05);
                     border-color: var(--wa-blue);
                 }
+
                 .marquee-item img {
                     width: 100%;
                     height: 100%;
@@ -146,7 +152,7 @@
 
                 const track = document.getElementById('marqueeTrack');
                 const wrapper = document.querySelector('.marquee-wrapper');
-                
+
                 if (TOTAL_PHOTOS === 0) {
                     track.innerHTML = '<div style="padding: 2rem; color: var(--text-muted); text-align: center; width: 100vw; font-style: italic;">No photos uploaded yet for this week.</div>';
                 } else {
@@ -154,7 +160,7 @@
                     for (let i = 1; i <= TOTAL_PHOTOS; i++) {
                         html += `
                             <div class="marquee-item">
-                                <img src="assets/${WEEK_FOLDER}/montage1/photo${i}.jpg" alt="Site Visit Photo" loading="lazy">
+                                <img src="assets/${WEEK_FOLDER}/montage3/photo${i}.jpg" alt="Site Visit Photo" loading="lazy" onerror="this.parentElement.style.display='none';">
                             </div>
                         `;
                     }
@@ -167,9 +173,9 @@
                 let direction = -1; // -1 = Left (Forward), 1 = Right (Backward)
                 let isPaused = false;
                 let lastTime = 0;
-                
+
                 // Duration for one full loop -> Reduced speed by 50% (81630ms)
-                const DURATION_MS = 81630; 
+                const DURATION_MS = 81630;
 
                 function animateMarquee(time) {
                     if (!lastTime) lastTime = time;
@@ -179,8 +185,8 @@
                     // Prevent huge jumps if tab was suspended
                     if (delta > 0 && delta < 100 && !isPaused && TOTAL_PHOTOS > 0) {
                         const halfWidth = track.scrollWidth / 2;
-                        const speed = halfWidth / DURATION_MS; 
-                        
+                        const speed = halfWidth / DURATION_MS;
+
                         position += speed * delta * direction;
 
                         if (position <= -halfWidth) {
@@ -207,7 +213,7 @@
                 document.getElementById('marqueeRev').addEventListener('click', () => {
                     direction = 1; // Move backward
                 });
-                
+
                 document.getElementById('marqueeFwd').addEventListener('click', () => {
                     direction = -1; // Move forward
                 });
@@ -234,20 +240,6 @@
                 unexpected developments encountered during this week of the internship.</p>
         </section>
         <!-- WEEK 3: CHALLENGES END -->
-
-        <!-- 4. VIDEO SECTION -->
-        <!-- WEEK 3: VIDEO START -->
-        <section class="section week-container" id="week3-video">
-            <h2 class="section-title">Field Documentation</h2>
-            <div class="video-embed-container">
-                <iframe src="https://www.youtube.com/embed/PLACEHOLDER" width="100%" title="Week 3 Field Documentation"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
-            </div>
-        </section>
-        <!-- WEEK 3: VIDEO END -->
 
         <!-- 5. REPORT SECTION -->
         <!-- WEEK 3: REPORT START -->
