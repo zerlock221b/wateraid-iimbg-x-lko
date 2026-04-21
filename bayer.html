@@ -88,13 +88,23 @@
                     <p>14+ Anganwadis</p>
                 </div>
                 <div class="team-card">
-                    <h3>Primary Challenge</h3>
-                    <p>Rusted pipes & missing walls</p>
-                </div>
-                <div class="team-card">
                     <h3>Focus Area</h3>
                     <p>Sanitation & Hygiene Education</p>
                 </div>
+            </div>
+            
+            <div class="team-card" style="max-width: 100%; text-align: left; margin: 2rem auto 0; padding: 2rem 3rem;">
+                <h3 style="text-align: center; margin-bottom: 1.5rem;">Primary Challenges</h3>
+                <ul style="padding-left: 20px; line-height: 1.6; color: var(--text-secondary); list-style-type: disc;">
+                    <li style="margin-bottom: 0.8rem;"><strong>Installed infrastructure is largely non-functional</strong>, especially water filters (8/13 AWCs), creating false assurance instead of safe water access.</li>
+                    <li style="margin-bottom: 0.8rem;"><strong>Operations & maintenance systems are weak</strong>, with breakdowns remaining unresolved and community repair mechanisms underperforming.</li>
+                    <li style="margin-bottom: 0.8rem;"><strong>Sanitation facilities are either absent or unusable</strong>, often due to lack of water linkage, leading to unsafe practices like open defecation.</li>
+                    <li style="margin-bottom: 0.8rem;"><strong>Hygiene behaviour change has not been effectively internalised</strong>, with training failing to translate into consistent community practices.</li>
+                    <li style="margin-bottom: 0.8rem;"><strong>Institutional support and accountability are insufficient</strong>, risking long-term sustainability once external intervention reduces.</li>
+                </ul>
+                <p style="text-align: center; margin-top: 1.5rem; color: var(--wa-blue); font-weight: 500;">
+                    <em>Check out the reports for a detailed description of what the issues indeed span.</em>
+                </p>
             </div>
         </section>
 
@@ -142,11 +152,144 @@
         <!-- BAYER: PHOTOS START -->
         <section class="section week-container" id="bayer-photos">
             <h2 class="section-title">Site Photography</h2>
-            <div class="glass-panel" style="text-align: center; padding: 4rem 2rem;">
-                <h3 style="font-family: 'DM Sans', sans-serif; letter-spacing: 0.2em; color: var(--text-muted);">
-                    ARRIVING SOON</h3>
-                <p style="margin-top: 1rem; opacity: 0.6;">Field documentation is currently being processed.</p>
+            <style>
+                .marquee-controls {
+                    display: flex;
+                    justify-content: center;
+                    gap: 1.5rem;
+                    margin-top: 1.5rem;
+                    position: relative;
+                    z-index: 10;
+                }
+
+                .marquee-wrapper {
+                    width: 100vw;
+                    margin-left: 50%;
+                    transform: translateX(-50%);
+                    overflow: hidden;
+                    white-space: nowrap;
+                    background: var(--glass-bg);
+                    padding: 2rem 0;
+                    margin-top: 1.5rem;
+                    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+                }
+
+                .marquee-track {
+                    display: inline-flex;
+                    gap: 1.5rem;
+                    padding-right: 1.5rem;
+                    will-change: transform;
+                }
+
+                .marquee-item {
+                    flex-shrink: 0;
+                    width: 350px;
+                    height: 250px;
+                    border-radius: 16px;
+                    overflow: hidden;
+                    border: 3px solid var(--glass-border);
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+                    transition: transform 0.3s ease, border-color 0.3s ease;
+                    background: var(--glass-bg);
+                }
+
+                .marquee-item:hover {
+                    transform: scale(1.05);
+                    border-color: var(--wa-blue);
+                }
+
+                .marquee-item img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            </style>
+
+            <div class="marquee-controls">
+                <button id="marqueeRev" class="carousel-btn" aria-label="Move Backwards">❮</button>
+                <button id="marqueeFwd" class="carousel-btn" aria-label="Move Forwards">❯</button>
             </div>
+
+            <div class="marquee-wrapper">
+                <div class="marquee-track" id="marqueeTrack">
+                    <!-- Images will be injected here via JS -->
+                </div>
+            </div>
+
+            <script>
+                // --- CONFIGURATION ---
+                const TOTAL_PHOTOS = 28; // 28 photos in montage_bayer folder
+                const FOLDER_PATH = 'bayer_photos/montage_bayer'; 
+                // ---------------------
+
+                const track = document.getElementById('marqueeTrack');
+                const wrapper = document.querySelector('.marquee-wrapper');
+
+                if (TOTAL_PHOTOS === 0) {
+                    track.innerHTML = '<div style="padding: 2rem; color: var(--text-muted); text-align: center; width: 100vw; font-style: italic;">No photos uploaded yet for this location.</div>';
+                } else {
+                    let html = '';
+                    for (let i = 1; i <= TOTAL_PHOTOS; i++) {
+                        html += `
+                            <div class="marquee-item">
+                                <img src="assets/${FOLDER_PATH}/photo${i}.jpeg" alt="Bayer Site Photo" loading="lazy" onerror="this.parentElement.style.display='none';">
+                            </div>
+                        `;
+                    }
+
+                    // Duplicate the items to ensure a seamless infinite scroll loop
+                    track.innerHTML = html + html;
+                }
+
+                let position = 0;
+                let direction = -1; // -1 = Left (Forward), 1 = Right (Backward)
+                let isPaused = false;
+                let lastTime = 0;
+
+                // Duration for one full loop -> Reduced speed by 50% (81630ms)
+                const DURATION_MS = 81630;
+
+                function animateMarquee(time) {
+                    if (!lastTime) lastTime = time;
+                    const delta = time - lastTime;
+                    lastTime = time;
+
+                    // Prevent huge jumps if tab was suspended
+                    if (delta > 0 && delta < 100 && !isPaused && TOTAL_PHOTOS > 0) {
+                        const halfWidth = track.scrollWidth / 2;
+                        const speed = halfWidth / DURATION_MS;
+
+                        position += speed * delta * direction;
+
+                        if (position <= -halfWidth) {
+                            position += halfWidth;
+                        } else if (position > 0) {
+                            position -= halfWidth;
+                        }
+
+                        track.style.transform = `translateX(${position}px)`;
+                    }
+
+                    requestAnimationFrame(animateMarquee);
+                }
+
+                if (TOTAL_PHOTOS > 0) {
+                    requestAnimationFrame(animateMarquee);
+                }
+
+                // Hover pausing
+                wrapper.addEventListener('mouseenter', () => isPaused = true);
+                wrapper.addEventListener('mouseleave', () => isPaused = false);
+
+                // Direction toggles
+                document.getElementById('marqueeRev').addEventListener('click', () => {
+                    direction = 1; // Move backward
+                });
+
+                document.getElementById('marqueeFwd').addEventListener('click', () => {
+                    direction = -1; // Move forward
+                });
+            </script>
         </section>
         <!-- BAYER: PHOTOS END -->
 
