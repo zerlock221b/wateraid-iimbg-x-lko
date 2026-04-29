@@ -52,6 +52,9 @@
                 </div>
             </li>
             <li>
+                <a href="documents.html">Documents</a>
+            </li>
+            <li>
                 <button id="theme-toggle" aria-label="Toggle Theme">🌓</button>
             </li>
         </ul>
@@ -92,11 +95,13 @@
                     width: 100vw;
                     margin-left: 50%;
                     transform: translateX(-50%);
-                    overflow-x: auto; /* Enable horizontal scrolling */
+                    overflow-x: auto;
+                    /* Enable horizontal scrolling */
                     overflow-y: hidden;
                     white-space: nowrap;
                     background: var(--glass-bg);
-                    padding: 2rem 0 1rem 0; /* Adjusted bottom pad for scrollbar */
+                    padding: 2rem 0 1rem 0;
+                    /* Adjusted bottom pad for scrollbar */
                     margin-top: 1.5rem;
                     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
                 }
@@ -105,11 +110,13 @@
                 .marquee-wrapper::-webkit-scrollbar {
                     height: 10px;
                 }
+
                 .marquee-wrapper::-webkit-scrollbar-track {
                     background: var(--glass-border);
                     border-radius: 5px;
                     margin: 0 2rem;
                 }
+
                 .marquee-wrapper::-webkit-scrollbar-thumb {
                     background: var(--wa-blue);
                     border-radius: 5px;
@@ -161,7 +168,7 @@
             <script>
                 // --- CONFIGURATION ---
                 // Update this number when you add or remove photos from the folder.
-                const TOTAL_PHOTOS = 48; // Set to the actual number of photos
+                const TOTAL_PHOTOS = 23; // Set to the actual number of photos
                 const WEEK_FOLDER = 'week1'; // Update this for week2, week3, etc.
                 // ---------------------
 
