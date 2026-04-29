@@ -52,6 +52,9 @@
                 </div>
             </li>
             <li>
+                <a href="documents.html">Documents</a>
+            </li>
+            <li>
                 <button id="theme-toggle" aria-label="Toggle Theme">🌓</button>
             </li>
         </ul>
@@ -266,7 +269,7 @@
 
             <script>
                 // --- CONFIGURATION ---
-                const TOTAL_PHOTOS = 19; // 19 photos in v_montage folder
+                const TOTAL_PHOTOS = 47; // 47 photos in v_montage folder
                 const FOLDER_PATH = 'v_montage'; 
                 // ---------------------
 
@@ -280,7 +283,7 @@
                     for (let i = 1; i <= TOTAL_PHOTOS; i++) {
                         html += `
                             <div class="marquee-item">
-                                <img src="assets/${FOLDER_PATH}/photo${i}.png" alt="Viega Site Photo" loading="lazy" onerror="this.parentElement.style.display='none';">
+                                <img src="assets/${FOLDER_PATH}/photo${i}.jpg" alt="Viega Site Photo" loading="lazy" onerror="this.parentElement.style.display='none';">
                             </div>
                         `;
                     }
