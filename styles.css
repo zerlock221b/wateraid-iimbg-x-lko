@@ -144,7 +144,7 @@ body.dark-theme .footer {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.2rem;
 }
 
 .nav-links li {
